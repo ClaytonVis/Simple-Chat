@@ -1,0 +1,22 @@
+{
+  "name": "simple-chat",
+  "version": "0.0.1",
+  "description": "SENG 513 assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClaytonVis/Simple-Chat.git"
+  },
+  "author": "Clayton Vis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ClaytonVis/Simple-Chat/issues"
+  },
+  "homepage": "https://github.com/ClaytonVis/Simple-Chat#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
