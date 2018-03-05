@@ -2,6 +2,15 @@ doctype html
 head
     title Test Me Out
 
+    link(href='https://fonts.googleapis.com/css?family=Space+Mono', rel='stylesheet')
+    style
+        include style.css
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(src='/socket.io/socket.io.js')
+
+
 #page-header.row
   h1.col-sm-8
     |Simple Chat
@@ -17,7 +26,7 @@ head
         li
           span.time 11:15:20
           span.auth User1:
-          span.mssg messages were already here
+          span.mssg messages were already here what about really long messages? Like if I talked alot
         li
           span.time 11:15:20
           span.auth User1:
@@ -253,8 +262,9 @@ head
         li User1
         li User3
         li User3
-        
-form(action='')
-  input#m(autocomplete='off')
-  button.btn.btn-primary Send
+
+#foot        
+  form(action='')
+    input#m(autocomplete='off')
+    button.btn.btn-primary Send
 

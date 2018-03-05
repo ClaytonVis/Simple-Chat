@@ -1,12 +1,12 @@
 const port = 3000;
 
-var app = require('express'());
+var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var cookieParser = require('cookie-parser');
 
 app.set('views', (__dirname, 'public'));
-app.set('view engine', 'pug');
+app.set('view engine', 'jade');
 app.use(cookieParser());
 
 
@@ -16,4 +16,9 @@ app.get('/', function(req, res){
         res.cookie("name", "User" + usrcount, {maxAge : 100000});
     }
     res.render('index');
+});
+
+
+http.listen(port,function(){
+    console.log('listening on ', port);
 });
