@@ -1,7 +1,8 @@
 doctype html
 head
     title Test Me Out
-
+    style.
+      <meta name="viewport" content="width=device-width, initial-scale=1">
     link(href='https://fonts.googleapis.com/css?family=Space+Mono', rel='stylesheet')
     style
         include style.css
@@ -11,260 +12,30 @@ head
     script(src='/socket.io/socket.io.js')
 
 
-#page-header.row
-  h1.col-sm-8
-    |Simple Chat
-  h1.col-sm-4
-    small
-      | Name:
-      span#name ...
+body
+  header.row
+    h1.col-sm-8
+      | Simple Chat
+    h1.col-sm-4
+      small
+        | Name:
+        span#name ...
       
-#main.row
-  .col-sm-8
-    .scrollme
+  #main
+    article#messagescont 
+      h2
+        | Messages
       ul#messages
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here what about really long messages? Like if I talked alot
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-        li
-          span.time 11:15:20
-          span.auth User1:
-          span.mssg messages were already here
-          
-  #userColumn.col-sm-4
-    .card
+           
+    aside#userColumn
+      h2
+        | Users
       ul#userList
-        li User1
-        li User3
-        li User3
+      button.btn.btn-primary(onclick='tellme()') scroller
+  footer#foot          
+    form(action='')
+      input#m(autocomplete='off')
+      button.btn.btn-primary Send
 
-#foot        
-  form(action='')
-    input#m(autocomplete='off')
-    button.btn.btn-primary Send
-
+  script
+    include index.js

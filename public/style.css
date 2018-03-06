@@ -2,42 +2,65 @@
 
 /* Formatting */
 body {
-  max-height: 100%;
+  height: 100vh;
+  background-color: #999999;
+  font: 24px Helvetica;
   overflow: hidden;
 }
 
-#page-header {
+header {
+  display: block;
+  margin: 4px;
+  padding: 5px;
+  min-height: 50px;
   background: lightblue;
-  height: 6.5vh;
 }
 
-#foot {
+footer {
   position: fixed;
   bottom: 0;
-  width: 100%;
-  height: 4vh;
-  padding: 0px;
-  margin: 0px;
+  width: calc(100vw);
+  min-height: 50px;
+  margin: 4px;
+  padding: 5px;
 }
 
 #main {
-  max-height: calc(100vh - 3.5em);
+  height: calc(100vh - 143px);
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-flow: row;
 }
+
 
 #name {
   margin-left: 15px;
 }
 
+
+#messagescont {
+  margin: 4px;
+  padding: 5px;
+  background: lightgreen;
+  flex: 6 1 85%;
+  order: 1;
+}
+
 #messages {
-  height: 90vh;
-  overflow: hidden;
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+  height: calc(100% - 63px);
+  bottom: 143px ;
   list-style-type: none;
   margin: 0;
   padding: 0;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 #messages li {
+  
   height: auto;
   padding: 10px 10px;
 }
@@ -47,7 +70,11 @@ body {
 }
 
 #userColumn {
-  background: blue;
+    margin: 4px;
+    padding: 5px;
+    flex: 1 1 15%;
+    order: 2;
+    background: #ccccff;
 }
 
 span + span {
@@ -67,4 +94,8 @@ form input {
   padding: 10px;
   width: 90%;
   margin-right: .5%;
+}
+
+form button {
+    width: 9%;
 }
