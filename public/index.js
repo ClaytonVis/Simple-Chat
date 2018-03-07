@@ -25,13 +25,22 @@ socket.on('new message', function(msg){
 
 $(function(){
     $('form').submit(function(){
-        msg = {
-            dt : new Date(),
-            usr: usrname,
-            mess: $('#m').val()
+        var cont = $('#m').val();
+        var contlist = cont.split(' ');
+        if (contlist[0] == '/nick'){
+            contlist.shift();
+            contlist = contlist.join(' ');
+            if (contlist.length >= 32) {
+                err("Names must be less than 32 characters in length.");
+            }
+        } else {
+          msg = {
+              dt : new Date(),
+              usr: usrname,
+              mess: cont
+          }
+          socket.emit('submit message', msg);
         }
-        socket.emit('submit message', msg);
-        console.log(msg);
         $('#m').val('');
         return false;
     });
@@ -54,9 +63,23 @@ function refreshMsg(){
         addMssg(date, auth, msg);
     }
 }
+
+function err(msg){
+    var now = new Date();
+    addMssg(now.toLocaleTimeString(), "System", msg);
+}
         
 function addMssg(date, auth, msg){
-    $('#messages').prepend('<li><span class="date">' + date + '</span><span class="auth">' + auth + '</span><span class="mssg">' + msg + '</span></li>');
+    var wrapclass = '<li>'
+    if (auth == "System") {
+        wrapclass = '<li class="sysMsg">';
+    }
+
+    var authclass = '"auth">';
+    if (usrname == auth) {
+        authclass = '"auth self">';
+    }
+    $('#messages').prepend(wrapclass + '<span class="date">' + date + '</span><span class=' + authclass + auth + ':</span><span class="mssg">' + msg + '</span></li>');
 }
 
 

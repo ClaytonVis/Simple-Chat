@@ -3,7 +3,7 @@
 /* Formatting */
 body {
   height: 100vh;
-  background-color: #999999;
+  background: #999999 !important;
   font: 24px Helvetica;
   overflow: hidden;
 }
@@ -43,7 +43,7 @@ footer {
   margin: 4px;
   padding: 5px;
   background: lightgreen;
-  flex: 6 1 85%;
+  flex: 6 1 80%;
   order: 1;
 }
 
@@ -55,26 +55,54 @@ footer {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
-#messages li {
+#messages li,
+#userList li {
   
   height: auto;
   padding: 10px 10px;
+  word-break: break-all;
 }
 
 #messages li:nth-child(odd) {
   background: #cfd2d4;
 }
 
+#userList li:nth-child(odd) {
+    background: #333333;
+}
+
 #userColumn {
     margin: 4px;
     padding: 5px;
-    flex: 1 1 15%;
+    flex: 1 1 20%;
     order: 2;
     background: #ccccff;
+}
+
+
+#userList {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 63px);
+  bottom: 143px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.self {
+  font-weight: bold;
+}
+
+.sysMsg {
+  font-weight: bold;
+  color: red;
 }
 
 span + span {
