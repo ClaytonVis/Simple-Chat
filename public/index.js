@@ -26,12 +26,18 @@ socket.on('new message', function(msg){
 $(function(){
     $('form').submit(function(){
         var cont = $('#m').val();
+        if (cont == undefined || cont == null || cont.length == 0) {
+            $('#m').val('');
+            return false;
+        }
         var contlist = cont.split(' ');
         if (contlist[0] == '/nick'){
             contlist.shift();
             contlist = contlist.join(' ');
             if (contlist.length >= 32) {
                 err("Names must be less than 32 characters in length.");
+            } else {
+                socket.emit('new name', contlist, usrname);
             }
         } else {
           msg = {

@@ -4,6 +4,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var cookieParser = require('cookie-parser');
+var cookie = require('cookie');
 var fs = require('fs');
 
 app.set('views', (__dirname, 'public'));
@@ -17,7 +18,6 @@ var messageFile = require("./logs/messages.json");
 var users = userFile['users'];
 var mssgs = messageFile['messages'];
 console.log('users: ', users);
-console.log('messages: ', mssgs);
 
 var date = new Date();
 userFile["/"] = date;
@@ -25,23 +25,51 @@ messageFile['/'] = date;
 fs.writeFileSync('./logs/users.json', (JSON.stringify(userFile)), 'utf8');
 fs.writeFileSync('./logs/messages.json', (JSON.stringify(messageFile)), 'utf8');
 
+function addUser(name){
+    users[name] = 'online'
+    userFile['users'] = users;
+    fs.writeFileSync('./logs/users.json', (JSON.stringify(userFile)), 'utf8');
+}
+
+function rmvUser(name){
+    var date = new Date();
+    users[usrname] = date.getTime();
+    userFile['users'] = users;
+    fs.writeFileSync('./logs/users.json', (JSON.stringify(userFile)), 'utf8');
+}
+
+function initName();
+    usrcount ++;
+    return ("User" ++ usrcount);
+}
 
 app.get('/', function(req, res){
     if (!req.cookies["name"]){
-        usrcount ++;      
-        res.cookie("name", "User" + usrcount, {maxAge : 100000});
+        res.cookie("name", initName(), {maxAge : 100000});
+    } else {
+        res.cookie('name', req.cookies['name'], {maxAge: 10000});
     }
     res.render('index');
 });
 
 io.on('connection', function(socket){
-    console.log("A user has connected!");
+    var theCookies = cookie.parse(socket.request.headers.cookie || socket.handshake.headers.cookie);
+    if (theCookies['name']){
+        var usrname = theCookies['name'];
+    } else {
+        var usrname = initName();
+    }
+    addUser(usrname);
+    socket.emit('verified name', usrname);
+
+       
     socket.emit('init', users, mssgs);
 
-    //    socket.on('init name', function(reqData){
-  //      console.log(reqData);
-        //console.log("something happens: " + socket.handshake.headers);
-   // });
+    socket.on('disconnect', function(){
+        console.log("A user has disconnected..");
+        rmvUser(usrname);
+        io.emit('update users', users);
+    });
 
     socket.on('submit message', function(incoming){
         mssgs.push(incoming);
@@ -52,6 +80,21 @@ io.on('connection', function(socket){
         fs.writeFileSync('./logs/messages.json', (JSON.stringify(messageFile)), 'utf8');
         io.emit('new message', incoming);
     });
+
+    socket.on('new name', function(newname, oldname){
+        console.log("Person: " + oldname + " has requested to change their name to: " + newname);
+        if (users[name] == 'online') {
+            socket.emit('denied');
+            console.log('\tDenied');
+        } else {
+            console.log('\tGranted');
+            users[name] == 'online';
+            userFile['users'] = users;
+            io.emit('update users', users);
+            fs.writeFileSync('./logs/users.json', (JSON.stringify(userFile)), 'utf8');
+        }
+    });
+
 });
 
 http.listen(port,function(){

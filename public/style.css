@@ -1,9 +1,57 @@
 /* Style */
+body {
+  background: #283d70 !important;
+}
+
+header {
+  background: #2e3546;
+}
+
+header > h1 {
+    color: white;
+}
+
+footer{
+  background: #2e3546;
+}
+
+form {
+  background: #2e3546;
+}
+
+.btn-primary {
+    background-color: #703529 !important;
+    border: 1px solid black !important;
+}
+
+#messagescont {
+  background: #e0ddd5;
+  border: 1px solid white; 
+  border-radius: 7pt;
+}
+
+#userColumn {
+  background: #c6934b;
+  border: 1px solid white;
+  border-radius: 7pt;
+}
+
+#messages li:nth-child(odd) {
+  background: #cfd2d4;
+}
+
+#userList {
+  border: 1px solid white;
+  border-radius: 7pt;
+}
+
+#userList li:nth-child(odd) {
+  background: #333333;
+}
 
 /* Formatting */
 body {
   height: 100vh;
-  background: #999999 !important;
   font: 24px Helvetica;
   overflow: hidden;
 }
@@ -13,7 +61,6 @@ header {
   margin: 4px;
   padding: 5px;
   min-height: 50px;
-  background: lightblue;
 }
 
 footer {
@@ -42,7 +89,6 @@ footer {
 #messagescont {
   margin: 4px;
   padding: 5px;
-  background: lightgreen;
   flex: 6 1 80%;
   order: 1;
 }
@@ -60,27 +106,19 @@ footer {
 }
 
 #messages li,
-#userList li {
-  
+#userList li { 
   height: auto;
   padding: 10px 10px;
   word-break: break-all;
 }
 
-#messages li:nth-child(odd) {
-  background: #cfd2d4;
-}
 
-#userList li:nth-child(odd) {
-    background: #333333;
-}
 
 #userColumn {
     margin: 4px;
     padding: 5px;
     flex: 1 1 20%;
     order: 2;
-    background: #ccccff;
 }
 
 
@@ -94,6 +132,7 @@ footer {
   padding: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  background: #e0ddd5;
 }
 
 .self {
@@ -112,7 +151,6 @@ span + span {
 
 form {
   height: 100%;
-  background: #000;
   padding: 3px;
   width: 100%;
 }
