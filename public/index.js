@@ -1,3 +1,5 @@
+
+
 var socket = io();
 
 var crumb = document.cookie.split('=');
@@ -5,15 +7,12 @@ var usrname = crumb[1];
 var usrlist;
 var mssglist;
 
-$('#name').text(usrname);
-
-
 
 socket.on('init', function(usrs, mssgs){
     usrlist = usrs;
     mssglist = mssgs;
     refreshMsg();
-//    refreshUsr();
+    refreshUsr();
 });
 
 socket.on('new message', function(msg){
@@ -22,6 +21,22 @@ socket.on('new message', function(msg){
     addMssg(date, msg.usr, msg.mess);
 });
 
+socket.on('verified name', function(name){
+    usrname = name;
+    document.cookie = "name=" + name +  " ; max-age=7200";
+    refreshMsg();
+    refreshUsr();
+    $('#name').text(usrname);
+});
+
+socket.on('updated users', function(users){
+    usrlist = users;
+    refreshUsr();
+});
+
+socket.on('denied', function(name){
+    err("The name, " + name + " is already taken.");
+});
 
 $(function(){
     $('form').submit(function(){
@@ -39,6 +54,9 @@ $(function(){
             } else {
                 socket.emit('new name', contlist, usrname);
             }
+        } else if (contlist[0] == '/rgb') {
+          console.log('nothing yet');  
+            
         } else {
           msg = {
               dt : new Date(),
@@ -52,6 +70,26 @@ $(function(){
     });
 });
 
+function refreshUsr(){
+    $('#userList').empty();
+    for (user in usrlist) {
+        if (usrlist[user] == 'online'){
+            $('#userList').append('<li class="online">' + user + '</li>');
+        } else {
+            var time = (new Date()).getTime();
+            var theirs = new Date();
+            theirs = usrlist[user];
+            time = Math.floor((time - theirs)/60000);
+            var tstr;
+            if (time < 1){
+                tstr = "<1 min";
+            } else {
+                tstr = time + " min";
+            }
+            $('#userList').append('<li class="offline">' + user + "<span class='time'>" + tstr +  '</span></li>');
+        }
+    }
+}
 
 function refreshMsg(){
     $('#messages').empty();
@@ -89,6 +127,3 @@ function addMssg(date, auth, msg){
 }
 
 
-function tellme(){
-    alert("me");
-}

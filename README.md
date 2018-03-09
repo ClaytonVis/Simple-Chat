@@ -1,2 +1,2 @@
 # Simple-Chat
-SENG 513 assignment. A simple chat web application.
+SENG 513 assignment. A simple chat room web application.

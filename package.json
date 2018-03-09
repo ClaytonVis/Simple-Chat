@@ -1,7 +1,7 @@
 {
   "name": "simple-chat",
   "version": "1.0.0",
-  "description": "SENG 513 assignment. A simple chat web application.",
+  "description": "SENG 513 assignment. A simple chat room web application.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

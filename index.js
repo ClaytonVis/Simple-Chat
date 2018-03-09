@@ -11,11 +11,11 @@ app.set('views', (__dirname, 'public'));
 app.set('view engine', 'jade');
 app.use(cookieParser());
 
-var usrcount = 0;
 
 var userFile = require('./logs/users.json');
 var messageFile = require("./logs/messages.json");
 var users = userFile['users'];
+var usrcount = userFile['count'];
 var mssgs = messageFile['messages'];
 console.log('users: ', users);
 
@@ -33,21 +33,24 @@ function addUser(name){
 
 function rmvUser(name){
     var date = new Date();
-    users[usrname] = date.getTime();
+    users[name] = date.getTime();
     userFile['users'] = users;
     fs.writeFileSync('./logs/users.json', (JSON.stringify(userFile)), 'utf8');
 }
 
-function initName();
+function initName(){
     usrcount ++;
-    return ("User" ++ usrcount);
+    userFile['count'] = usrcount;
+    fs.writeFileSync('./logs/users.json', JSON.stringify(userFile), 'utf8');
+    return ("User" + usrcount);
 }
 
 app.get('/', function(req, res){
+    var expire = 100 * 60 * 120;
     if (!req.cookies["name"]){
-        res.cookie("name", initName(), {maxAge : 100000});
+        res.cookie("name", initName(), { maxAge : expire});
     } else {
-        res.cookie('name', req.cookies['name'], {maxAge: 10000});
+        res.cookie('name', req.cookies['name'], { maxAge: expire })
     }
     res.render('index');
 });
@@ -59,14 +62,23 @@ io.on('connection', function(socket){
     } else {
         var usrname = initName();
     }
+
+    console.log(usrname + " has connected");
+    users[usrname] = 'online';
+    for (user in users){
+    }
+
+    userFile['users'] = users;
+    fs.writeFileSync('./logs/users.json', (JSON.stringify(userFile)), 'utf8');
+
     addUser(usrname);
     socket.emit('verified name', usrname);
-
+    io.emit('update users', users);
        
     socket.emit('init', users, mssgs);
 
     socket.on('disconnect', function(){
-        console.log("A user has disconnected..");
+        console.log(usrname + " has disconnected.");
         rmvUser(usrname);
         io.emit('update users', users);
     });
@@ -83,12 +95,13 @@ io.on('connection', function(socket){
 
     socket.on('new name', function(newname, oldname){
         console.log("Person: " + oldname + " has requested to change their name to: " + newname);
-        if (users[name] == 'online') {
-            socket.emit('denied');
+        if (users[newname] == 'online') {
+            socket.emit('denied', newname);
             console.log('\tDenied');
         } else {
-            console.log('\tGranted');
-            users[name] == 'online';
+            socket.emit('verified name', newname);
+            users[newname] == 'online';
+            delete users.oldname;
             userFile['users'] = users;
             io.emit('update users', users);
             fs.writeFileSync('./logs/users.json', (JSON.stringify(userFile)), 'utf8');

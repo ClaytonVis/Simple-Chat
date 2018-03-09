@@ -45,8 +45,27 @@ form {
   border-radius: 7pt;
 }
 
+#userList li {
+  border-bottom: 1px dotted black;
+}
+
 #userList li:nth-child(odd) {
-  background: #333333;
+  background: #dedede;
+}
+
+.online {
+  color: green;
+  font-weight: 800;
+}
+
+.offline {
+  color: red;
+  font-weight: 800;
+}
+
+.time {
+    margin-left: 25px;
+    font-size: 0.85em;
 }
 
 /* Formatting */
