@@ -38,12 +38,16 @@ form button {
     display: flex;
 }
 
+.time {
+    font-family: 'Space Mono', monospace;
+}
+
 #userColumn {
     background: red;
 }
 
 #messageColumn {
-    background: blue;
+    background: #e3e3e3;
 }
 
 #messages {
@@ -57,5 +61,5 @@ form button {
 }
 
 #messages li:nth-child(odd) {
-    background: #eee;
+    background: #cfd2d4;
 }
