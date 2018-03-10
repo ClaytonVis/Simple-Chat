@@ -4,21 +4,28 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var cookieParser = require('cookie-parser')
+var favicon = require('serve-favicon');
+var path = require('path');
 
+let counter = 0;
+
+app.set('views', path.join( __dirname, 'views'));
+app.set('view engine', 'jade');
 app.use(cookieParser());
+app.use(favicon(path.join( __dirname, 'chaticon.ico')));
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
-//    if (req.cookies["name"]) {
-//        res.send(req.cookies["name"]);
-//    } else {
-//        res.cookie("name", "testor");
-//        res.send("Welcome for the first time, " + req.cookies["name"]);
-//    }
+    res.cookie("name", "Test Name");
+    res.render('home', {
+        title: 'Jade Test'
+    });
 });
 
 io.on('connection', function(socket){
-    console.log('a user connected');
+    counter += 1;
+    console.log('User: has connected');
+    
+
     socket.on('disconnect', function(){
         console.log('user disconnected');
     });

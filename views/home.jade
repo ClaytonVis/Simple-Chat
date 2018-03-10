@@ -1,0 +1,51 @@
+doctype html
+html
+    head
+        title Simple Chatter
+        style.
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font: 13px Helvetica, Arial; }
+            form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+            form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+            form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+            .page-header { background: lightblue; }
+            .flex-container { display: flex; }
+            #userColumn { background: red; }
+            #messageColumn { background: blue; }
+            #messages { list-style-type: none; margin: 0; padding:0; }
+            #messages li { padding: 5px 10px; }
+            #messages li:nth-child(odd) { background: #eee; }
+        link(rel='shortcut icon', href='chaticon.ico')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+        script(src='/socket.io/socket.io.js')
+
+    body
+        .page-header
+            h1
+                | Simple Chat 
+                small
+                    | Name: 
+                    span#name ...
+        #main.row
+            #messageColumn.col-sm-8
+                ul#messages
+            #userColumn.col-sm-4
+                h2 Users
+                ul#userWell.well.well-sm
+        form(action='')
+            input#m(autocomplete='off')
+            button.btn.btn-primary Send
+        script.
+            $(function () {
+            var socket = io();
+            $('form').submit(function(){
+            socket.emit('chat message', $('#m').val());
+            $('#m').val('');
+            return false;
+            });
+            socket.on('chat message', function(msg){
+            $('#messages').append($('<li>').text(msg));
+            });
+            });
