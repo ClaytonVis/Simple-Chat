@@ -6,31 +6,60 @@ var io = require('socket.io')(http);
 var cookieParser = require('cookie-parser')
 var favicon = require('serve-favicon');
 var path = require('path');
+var cookie = require('cookie');
+
 
 let counter = 0;
+let userslist = {};
+let messagelist = [];
 
 app.set('views', path.join( __dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(cookieParser());
-app.use(favicon(path.join( __dirname, 'chaticon.ico')));
+//app.use(favicon(path.join( __dirname, 'chaticon.ico')));
 
 app.get('/', function(req, res){
-    res.cookie("name", "Test Name");
+    if (!req.cookies["name"]) {
+        counter ++;
+        res.cookie("name", "User" + counter);
+    }
     res.render('home', {
-        title: 'Jade Test'
+        users: userslist,
+        messages: messagelist
     });
+ 
 });
 
 io.on('connection', function(socket){
-    counter += 1;
-    console.log('User: has connected');
-    
+    usrcook = cookie.parse(socket.request.headers.cookie || socket.handshake.headers.cookie);
+    if (usrcook["name"]) {
+        usrname = usrcook["name"];
+    } else {
+        counter ++;
+        usrname = "User" + counter;
+    }
+
+    console.log(usrname + ' has connected');
+    userslist[usrname] = "online";
 
     socket.on('disconnect', function(){
-        console.log('user disconnected');
+        console.log(usrname + ' has disconnected');
+        userslist[usrname] = "offline";
     });
+
     socket.on('chat message', function(msg){
-        io.emit('chat message', msg);
+        if (msg.split(' ')[0] == '/nick') {
+            var newname = msg.slice(6);
+            if (newname.length >= 16) {
+                console.log('name too long');
+            } else {
+                console.log(newname);
+                usrname = newname;
+                socket.emit('new name', newname);
+            }
+        } else { 
+            io.emit('chat message', msg);
+        }
     });
 });
 

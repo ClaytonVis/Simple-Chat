@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/ClaytonVis/Simple-Chat#readme",
   "dependencies": {
+    "cookie": "^0.3.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "favicon": "0.0.2",
     "jade": "^1.11.0",
     "jquery": "^3.3.1",
