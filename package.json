@@ -1,7 +1,7 @@
 {
   "name": "simple-chat",
-  "version": "0.0.1",
-  "description": "SENG 513 assignment",
+  "version": "1.0.0",
+  "description": "SENG 513 assignment. A simple chat web application.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,21 +10,16 @@
     "type": "git",
     "url": "git+https://github.com/ClaytonVis/Simple-Chat.git"
   },
-  "author": "Clayton Vis",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ClaytonVis/Simple-Chat/issues"
   },
   "homepage": "https://github.com/ClaytonVis/Simple-Chat#readme",
   "dependencies": {
-    "cookie": "^0.3.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
-    "express-session": "^1.15.6",
-    "favicon": "0.0.2",
-    "jade": "^1.11.0",
-    "jquery": "^3.3.1",
-    "serve-favicon": "^2.4.5",
+    "pug": "^2.0.1",
     "socket.io": "^2.0.4"
   }
 }

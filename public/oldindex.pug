@@ -1,0 +1,87 @@
+doctype html
+html
+    head
+        title Simple Chat
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(href='https://fonts.googleapis.com/css?family=Space+Mono', rel='stylesheet')
+        style
+            include style.css
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+        script(src='/socket.io/socket.io.js')
+
+    body
+        .page-header.row
+            h1.col-sm-8
+                | Simple Chat
+            h1.col-sm-4
+                small
+                    | Name: 
+                    span#name ...
+        #main.row
+            #messageColumn.col-sm-8
+                ul#messages
+                    li 
+                        span.time 11:15:20 
+                        span.auth  User1:
+                        |  messages were already here
+                    li
+                        span.time 11:15:25 
+                        span.auth  Use No:
+                        |  I don't want no cookies
+                    li
+                        span.time 11:15:58 
+                        span.auth  User1:
+                        |  You gonna get them anyways
+                    li
+                        span.time 11:16:25 
+                        span.auth.self  Use yourself:
+                        |  I don't wanna actually talk.
+                    li 
+                        span.time 11:15:20 
+                        span.auth  User1:
+                        |  messages were already here
+                    li
+                        span.time 11:15:25 
+                        span.auth  Use No:
+                        |  I don't want no cookies
+                    li
+                        span.time 11:15:58 
+                        span.auth  User1:
+                        |  You gonna get them anyways
+                    li
+                        span.time 11:16:25 
+                        span.auth.self  Use yourself:
+                        |  I don't wanna actually talk.
+                    li 
+                        span.time 11:15:20 
+                        span.auth  User1:
+                        |  messages were already here
+                    li
+                        span.time 11:15:25 
+                        span.auth  Use No:
+                        |  I don't want no cookies
+                    li
+                        span.time 11:15:58 
+                        span.auth  User1:
+                        |  You gonna get them anyways
+                    li
+                        span.time 11:16:25 
+                        span.auth.self  Use yourself:
+                        |  I don't wanna actually talk.
+            #userColumn.col-sm-4
+                h2 Users
+                ul#users
+                    li user1
+                    li user me
+                    li use yourself
+                    li no
+                    li yes
+
+        form(action='')
+            input#m(autocomplete='off')
+            button.btn.btn-primary Send
+
+        script
+            include index.js

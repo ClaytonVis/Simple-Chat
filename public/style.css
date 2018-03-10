@@ -1,0 +1,68 @@
+/* style */ 
+.page-header {
+    background: green;
+}
+
+#disp {
+    background: lightblue;
+}
+
+#messagecolumn {
+    background: red;
+}
+
+#usercolumn {
+    background: lightgreen;
+}
+
+form {
+    background: #000;
+}
+
+/* formatting */
+
+body{
+    overflow: hidden;
+}
+
+#disp {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#main {
+    flex: 1;
+}
+
+.scrollable {
+    overflow-y:auto !important;
+    height: 100%;
+}
+
+.mycolumns {
+    height: calc(100vh - 72px);
+    flex: 1;
+    overflow: hidden;
+}
+
+form {
+    padding: 3px;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+form input {
+    border: 0;
+    padding: 10px;
+    width: 90%;
+    margin-right: .5%;
+}
+
+form button {
+    width 10%;
+    background: rgb(130, 224, 255);
+    border: none;
+    padding: 10px;
+}

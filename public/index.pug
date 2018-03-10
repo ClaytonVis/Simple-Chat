@@ -1,0 +1,47 @@
+doctype html
+html
+    head
+        title Simple Chat
+        link(href='https://fonts.googleapis.com/css?family=Space+Mono', rel='stylesheet')
+        style
+            include style.css
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+        script(src='/socket.io/socket.io.js')
+
+    body
+        #disp
+            .container-fluid
+                .page-header
+                    h1.col-sm-8
+                        |Simple Chat
+                    h1.col-sm-4
+                        small
+                            | Name:
+                            span#name ...
+
+            #main
+                .container-fluid
+                    .row
+                        .col-8
+                            .mycolumns
+                                .card
+                                    .scrollable
+                                        ul#messages
+                                            li test it out
+
+
+                        .col-4.mycolumns
+                            ul#users.scrollable
+                                li user1
+                                li user2
+
+
+            form(action='')
+                input#m(autocomplete='off')
+                button.btn.btn-primary Send
+
+        script
+            include index.js
+                
