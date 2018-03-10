@@ -1,3 +1,6 @@
+#Ignore the chaticon
+*.ico
+
 # Logs
 logs
 *.log
