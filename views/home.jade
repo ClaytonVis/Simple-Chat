@@ -23,12 +23,11 @@ html
             #userColumn.col-sm-4
                 h2 Users
                 ul#userWell.well.well-sm
+            button.btn.btn-primary(onclick='getName()') test
+
         form(action='')
             input#m(autocomplete='off')
             button.btn.btn-primary Send
-
-        button.btn.btn-primary(onclick='alertMe()') Cookies
-        button.btn.btn-danger(onclick='clearMe()') Clear
 
         script
             include home.js

@@ -1,6 +1,11 @@
 var socket = io();
 var users;
 var usrname;
+
+function getName () {
+    alert(usrname);
+}
+
 if (document.cookie) {
     var cookieList = document.cookie.split(';');
     usrname = cookieList[cookieList.indexOf('name=')];
@@ -8,15 +13,6 @@ if (document.cookie) {
     socket.emit('init name');
     
 };
-
-function alertMe() {
-    alert("this works bro\n" + document.cookie);
-}
-
-function clearMe() {
-    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    alert("possibly cleared\n" + document.cookie);
-}
 
 
 $(function () {
@@ -26,7 +22,6 @@ $(function () {
         var time = date.getTime();
         var mssg = time + " " + usrname + " " + $('#m').val();
         socket.emit('submit message', mssg);
-       // socket.emit('submit message', (time + (usrname + ": " + $('#m').val())));
         $('#m').val('');
         return false;
     });
@@ -68,6 +63,7 @@ $(function () {
 });
 
 function parseMssg(mssg) {
+    var aclass;
     if (mssg.toString() !== 0) {
         var date = new Date();
         splMsg = mssg.split(' ');
@@ -75,7 +71,12 @@ function parseMssg(mssg) {
         var auth = splMsg[1];
         var time = date.toLocaleTimeString();
         var msgTxt = mssg.slice(splMsg[0].length + splMsg[1].length + 2);
-        return ('<li><span class="time">' + time + ' </span><span class="auth"> ' + auth + ': </span><span class="mssg"> ' + msgTxt + ' </span></li>');
+        if (auth == usrname) {
+            aclass = '<span class="auth self"> ';
+        } else {
+            aclass = '<span class="auth"> ';
+        }
+        return ('<li><span class="time">' + time + ' </span>' + aclass + auth + ': </span><span class="mssg"> ' + msgTxt + ' </span></li>');
     } else {
         return false;
     }

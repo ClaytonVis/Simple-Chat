@@ -18,7 +18,6 @@ let msgCount = 0;
 app.set('views', path.join( __dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(cookieParser());
-//app.use(favicon(path.join( __dirname, 'chaticon.ico')));
 
 app.get('/', function(req, res){
     if (!req.cookies["name"]) {
@@ -35,12 +34,17 @@ io.on('connection', function(socket){
     usrcook = cookie.parse(socket.request.headers.cookie || socket.handshake.headers.cookie);
     if (usrcook["name"]) {
         usrname = usrcook["name"];
+        if (userslist[usrname] == "online") {
+            usrcount ++;
+            usrname = "User" + usrcount;
+            socket.emit('new name', usrname);
+        }
     } else {
         usrcount ++;
         usrname = "User" + usrcount;
+        socket.emit('new name', usrname);
     }
 
-    socket.emit('new name', usrname);
     socket.emit('init messages', messagequeue);
     console.log(usrname + ' has connected');
     userslist[usrname] = "online";

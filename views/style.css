@@ -42,6 +42,10 @@ form button {
     font-family: 'Space Mono', monospace;
 }
 
+.self {
+    font-style: bold;
+}
+
 #userColumn {
     background: red;
 }
