@@ -74,7 +74,9 @@ io.on('connection', function(socket){
     addUser(usrname);
     socket.emit('verified name', usrname);
     io.emit('update users', users);
-       
+
+    console.log("what is sent: " + mssgs);
+    console.log("the length: " + mssgs.length);
     socket.emit('init', users, mssgs);
 
     socket.on('disconnect', function(){

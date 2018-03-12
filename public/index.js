@@ -9,6 +9,8 @@ var mssglist;
 
 
 socket.on('init', function(usrs, mssgs){
+    console.log("What I get: " + mssgs);
+    console.log("The length: " + mssgs.length);
     usrlist = usrs;
     mssglist = mssgs;
     refreshMsg();
@@ -24,7 +26,6 @@ socket.on('new message', function(msg){
 socket.on('verified name', function(name){
     usrname = name;
     document.cookie = "name=" + name +  " ; max-age=7200";
-    refreshMsg();
     refreshUsr();
     $('#name').text(usrname);
 });
