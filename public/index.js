@@ -23,9 +23,10 @@ socket.on('new message', function(msg){
     addMssg(date, msg.usr, msg.mess);
 });
 
-socket.on('verified name', function(name){
+socket.on('verified name', function(name, users){
     usrname = name;
     document.cookie = "name=" + name +  " ; max-age=7200";
+    usrlist = users;
     refreshUsr();
     $('#name').text(usrname);
 });

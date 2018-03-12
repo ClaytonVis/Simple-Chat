@@ -63,21 +63,17 @@ io.on('connection', function(socket){
         var usrname = initName();
     }
 
+    socket.emit('init', users, mssgs);
     console.log(usrname + " has connected");
     users[usrname] = 'online';
-    for (user in users){
-    }
 
     userFile['users'] = users;
     fs.writeFileSync('./logs/users.json', (JSON.stringify(userFile)), 'utf8');
 
     addUser(usrname);
-    socket.emit('verified name', usrname);
+    socket.emit('verified name', usrname, users);
     io.emit('update users', users);
 
-    console.log("what is sent: " + mssgs);
-    console.log("the length: " + mssgs.length);
-    socket.emit('init', users, mssgs);
 
     socket.on('disconnect', function(){
         console.log(usrname + " has disconnected.");
